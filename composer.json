@@ -3,13 +3,17 @@
     "description": "Documentation ",
     "license": "MIT",
     "authors": [
-		"Jody Castro",
-		"jcandothers@gmail.com"
+		{
+			"name": "Jody Castro",
+			"email": "jcandothers@gmail.com",
+			"homepage": "https://www.jodycastro.com"
+		}
     ],
     "minimum-stability": "stable",
     "require": {
         "php" : "^7.1",
-        "illuminate/support": "~5.5.0|~5.6.0"
+        "illuminate/support": "~5.5.0|~5.6.0",
+        "graham-campbell/markdown": "^10.0"
     },
     "require-dev": {
     },

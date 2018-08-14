@@ -13,12 +13,7 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/../config/docs.php' => config_path('docs.php'),
-        ], 'config');
-
-        $this->mergeConfigFrom(__DIR__.'/../config/docs.php', 'docs');
-
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 
 
@@ -29,6 +24,6 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'docs');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'docs');
     }
 }
