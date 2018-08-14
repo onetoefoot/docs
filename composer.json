@@ -1,0 +1,33 @@
+{
+    "name": "onetoefoot/docs",
+    "description": "Documentation ",
+    "license": "MIT",
+    "authors": [
+		"Jody Castro",
+		"jcandothers@gmail.com"
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php" : "^7.1",
+        "illuminate/support": "~5.5.0|~5.6.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Onetoefoot\\Docs\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Onetoefoot\\Docs\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Onetoefoot\\Docs\\DocsServiceProvider"
+            ]
+          }
+    }
+}
