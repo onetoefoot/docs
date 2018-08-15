@@ -56,7 +56,6 @@ a:focus {
     color: #636b6f;
     transition: all 0.3s;
     margin-top: 65px;
-    padding: 20px;
 }
 
 #docs-sidebar.active {
@@ -68,33 +67,39 @@ a:focus {
     background: #6d7fcc;
 }
 
+#docs-sidebar .sidebar-header h3 {
+    margin: 20px;
+}
 #docs-sidebar ul.components {
     padding: 20px 0;
     /* border-bottom: 1px solid #47748b; */
 }
+#docs-sidebar ul.components li a{
+    padding-left: 30px;
+}
 
 #docs-sidebar ul p {
     color: #636b6f;
-    padding: 10px;
+    padding: 10px 10px 0px 20px;
     font-weight: bold;
 }
 
 #docs-sidebar ul li a {
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     font-size: 1.1em;
     display: block;
 }
 
 #docs-sidebar ul li a:hover {
-    color: #cccccc;
-    background: #fff;
+    color: #000;
+    /* background: #fff; */
 }
 
-/* #docs-sidebar ul li.active>a,
-a[aria-expanded="true"] {
+#docs-sidebar ul li.active>a {
     color: #fff;
-    background: #6d7fcc;
-} */
+    font-weight: bold;
+    background: #636b6f;
+}
 
 a[data-toggle="collapse"] {
     position: relative;

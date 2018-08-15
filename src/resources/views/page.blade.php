@@ -7,26 +7,35 @@
 @include('docs::style');
 
     <div class="wrapper">
-        <!-- Sidebar  -->
+
         <nav id="docs-sidebar">
+
             <div class="sidebar-header">
-                <h3>{{__('Documentation')}}</h3>
+                <h3><a href="/docs">{{__('Documentation')}}</a></h3>
             </div>
 
             <ul class="list-unstyled components">
                 <p>{{ $package['title'] }}</p>
 
                 @foreach ($menu_base as $link => $title)
-                    <li>
+                    <li @if ($page_location == $link) class="active" @endif>
                         <a href="/docs/{{$package_name}}/{{$version}}/{{$link}}">{{$title}}</a>
                     </li>
+                @endforeach
+
+                @foreach ($extra_docs as $dir => $files)
+                <p>{{ ucwords(str_replace('-', ' ', $dir)) }}
+                    @foreach($files as $link) 
+                    <li @if ($page_location == $link) class="active" @endif>
+                        <a href="/docs/{{$package_name}}/{{$version}}/{{$dir}}/{{$link}}">{{ ucwords(str_replace('-', ' ', $link)) }}</a>
+                    </li>
+                    @endforeach
                 @endforeach
 
             </ul>
 
         </nav>
 
-        <!-- Page Content  -->
         <div id="content">
             {!! $content !!}
         </div>

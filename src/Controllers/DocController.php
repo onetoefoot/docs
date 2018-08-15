@@ -19,18 +19,20 @@ class DocController
 
     public function getPageProperties() : array
     {
-        //FIXME: is there a better way to do this?
         $urlParts = explode('/', request()->path());
         array_shift($urlParts); // remove docs part of array
-        $package = config('docs.templates.' . $urlParts[0]);
-        if (!$package) {
+
+        $packageName = $urlParts[0];
+        if (!$package = config('docs.templates.' . $packageName)){
             abort(404);
         }
+
         $latestVersion = end($package['versions']);
-        $packageName = $urlParts[0];
+
+        $pageLocation = end($urlParts);
+
         if (count($urlParts) == 1) {
-            // if in the root redirect to latest version
-            $urlPath = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$urlParts[0].'/'.$latestVersion.'/introduction.md';
+            $urlPath = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.$latestVersion.'/introduction.md';
         } else {
             array_shift($urlParts);
             $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.implode('/', $urlParts) . '.md';
@@ -41,14 +43,41 @@ class DocController
             abort(404);
         }
 
+        $version = $latestVersion;
+
         $pageProperties = $package;
+        $pageProperties['extra_docs'] = $this->getExtraDocs(base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName .'/'.$version);
         $pageProperties['package_name'] = $packageName;
+        $pageProperties['page_location'] = $pageLocation;
         $pageProperties['pagePath'] = request()->path();
         $pageProperties['package'] = $package;
-        $pageProperties['version'] = $latestVersion;
+        $pageProperties['version'] = $version;
         $pageProperties['menu_base'] = config('docs.menu_base');
         $pageProperties['content'] = Markdown::convertToHtml($document);
 
         return $pageProperties;
     }
+
+    /**
+     * Get any extra directories with documentation inside them
+     *
+     * @param string $path
+     * @return array
+     */
+    private function getExtraDocs($path) : array
+    {
+        $results = [];
+        $list = glob($path.'/*/*.md');
+        if (is_array($list)) {
+            foreach ($list as $newDoc) {
+                $listParts = explode('/', $newDoc);
+                $file = array_pop($listParts); // grab the file name
+                $dir = array_pop($listParts); // grab the directory name
+                $results[$dir][] = substr($file, 0, -3); // remove the .md on the end
+            }
+        }
+
+        return $results;
+    }
+
 }

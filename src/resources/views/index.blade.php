@@ -17,7 +17,7 @@
 
             @php ($templates = config('docs.templates'))
                 @foreach ($templates as $package => $params)
-                    <h5><a href="/docs/{{$package}}">{{$params['title']}}</a></h5>
+                    <h5><a href="/docs/{{$package}}/{{end($params['versions'])}}/introduction">{{$params['title']}}</a></h5>
                     <p>{{$params['description']}}</p>
             @endforeach
         </div>
