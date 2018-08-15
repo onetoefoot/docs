@@ -13,6 +13,13 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="config"
+        $this->publishes([
+            __DIR__.'/../config/docs.php' => config_path('docs.php'),
+        ], 'config');
+        $this->mergeConfigFrom(__DIR__.'/../config/docs.php', 'docs');
+
         $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 

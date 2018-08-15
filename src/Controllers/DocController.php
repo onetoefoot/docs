@@ -27,11 +27,13 @@ class DocController
             abort(404);
         }
         $latestVersion = end($package['versions']);
+        $packageName = $urlParts[0];
         if (count($urlParts) == 1) {
-            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$urlParts[0].'/'.$latestVersion.'/introduction.md';
+            // if in the root redirect to latest version
+            $urlPath = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$urlParts[0].'/'.$latestVersion.'/introduction.md';
         } else {
-            $packageName = array_shift($urlParts);
-            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.$latestVersion.'/'.implode('/', $urlParts) . '.md';
+            array_shift($urlParts);
+            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.implode('/', $urlParts) . '.md';
         }
         try {
             $document = File::get($path);
@@ -40,7 +42,11 @@ class DocController
         }
 
         $pageProperties = $package;
+        $pageProperties['package_name'] = $packageName;
         $pageProperties['pagePath'] = request()->path();
+        $pageProperties['package'] = $package;
+        $pageProperties['version'] = $latestVersion;
+        $pageProperties['menu_base'] = config('docs.menu_base');
         $pageProperties['content'] = Markdown::convertToHtml($document);
 
         return $pageProperties;

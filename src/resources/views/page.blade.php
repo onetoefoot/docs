@@ -4,15 +4,32 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                here
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                {!! $content !!}
-            </main>
+@include('docs::style');
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="docs-sidebar">
+            <div class="sidebar-header">
+                <h3>{{__('Documentation')}}</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>{{ $package['title'] }}</p>
+
+                @foreach ($menu_base as $link => $title)
+                    <li>
+                        <a href="/docs/{{$package_name}}/{{$version}}/{{$link}}">{{$title}}</a>
+                    </li>
+                @endforeach
+
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            {!! $content !!}
         </div>
-    </div>  
+    </div>
 
 @endsection

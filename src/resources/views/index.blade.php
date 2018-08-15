@@ -2,35 +2,25 @@
 
 @section('content')
 
-<docs-main class="main-docs">
-    <docs-header class="header-docs">
-        <h1>Documentation</h1>
-        <p>Documentation for packages</p>
-    </docs-header>
+    @include('docs::style')
 
-    <docs-main class="main-docs">
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="docs-sidebar">
 
-        <div class="grid">
-            <div class="grid_col -width-2/3">
-                <article class="article">
+        </nav>
 
-                    <h5><a href="/docs/tasks">Tasks</a></h5>
-                    <p>tasks</p>
+        <!-- Page Content  -->
+        <div id="content">
+            <h1>{{__('Docs')}}</h1>
+            <p>{{__('Documentation about current packages')}}</p>
 
-                    <h5><a href="/docs/docs">Docs</a></h5>
-                    <p>docs</p>
-
-                    <h5><a href="/docs/sampleidentifier">SampleIdentifier</a></h5>
-                    <p>sampleidentifier</p>
-
-                </article>
-            </div>
+            @php ($templates = config('docs.templates'))
+                @foreach ($templates as $package => $params)
+                    <h5><a href="/docs/{{$package}}">{{$params['title']}}</a></h5>
+                    <p>{{$params['description']}}</p>
+            @endforeach
         </div>
 
-    </docs-main>
-
-    <docs-footer class="footer-docs">
-    </docs-footer>
-</docs-main>
-
+    </div>
 @endsection
