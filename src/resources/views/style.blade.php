@@ -3,7 +3,6 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
 }
 
 a,
@@ -79,7 +78,8 @@ a:focus {
 }
 
 #docs-sidebar ul p {
-    color: #636b6f;
+    color: #1b3747;
+
     padding: 10px 10px 0px 20px;
     font-weight: bold;
 }

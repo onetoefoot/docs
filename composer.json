@@ -13,7 +13,8 @@
     "require": {
         "php" : "^7.1",
         "illuminate/support": "~5.5.0|~5.6.0",
-        "graham-campbell/markdown": "^10.0"
+        "components/highlightjs": "^9.12",
+        "league/commonmark": "^0.17.5"
     },
     "require-dev": {
     },

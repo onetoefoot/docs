@@ -6,7 +6,7 @@ use Exception;
 use Storage;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
-use GrahamCampbell\Markdown\Facades\Markdown;
+use League\CommonMark\CommonMarkConverter;
 
 class DocController
 {
@@ -53,7 +53,8 @@ class DocController
         $pageProperties['package'] = $package;
         $pageProperties['version'] = $version;
         $pageProperties['menu_base'] = config('docs.menu_base');
-        $pageProperties['content'] = Markdown::convertToHtml($document);
+        $converter = new CommonMarkConverter();
+        $pageProperties['content'] = $converter->convertToHtml($document);
 
         return $pageProperties;
     }

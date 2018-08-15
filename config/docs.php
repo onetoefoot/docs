@@ -1,16 +1,16 @@
 <?php
 return [
     'templates' => [
+        'docs' => [
+            'githubUrl' => 'https://github.com/onetoefoot/docs',
+            'title' => 'Docs',
+            'description' => 'A simple way I manage package documentation',
+            'versions' => ['v1'],
+        ],
         'tasks' => [
             'githubUrl' => 'https://github.com/onetoefoot/tasks',
             'title' => 'Tasks',
             'description' => 'Something about description',
-            'versions' => ['v1'],
-        ],
-        'docs' => [
-            'githubUrl' => 'https://github.com/onetoefoot/docs',
-            'title' => 'Docs',
-            'description' => 'Something about docs',
             'versions' => ['v1'],
         ],
         'sampleidentifier' => [
