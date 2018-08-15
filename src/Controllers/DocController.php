@@ -6,6 +6,7 @@ use Exception;
 use Storage;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class DocController
 {
@@ -13,35 +14,34 @@ class DocController
     {
         $pageProperties = $this->getPageProperties();
 
-        return view('page')->with($pageProperties);
+        return view('docs::page')->with($pageProperties);
     }
 
     public function getPageProperties() : array
     {
         //FIXME: is there a better way to do this?
-        $requestPath = substr(request()->path(), 5);
-        $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/' . $requestPath . '.md';
+        $urlParts = explode('/', request()->path());
+        array_shift($urlParts); // remove docs part of array
+        $package = config('docs.templates.' . $urlParts[0]);
+        if (!$package) {
+            abort(404);
+        }
+        $latestVersion = end($package['versions']);
+        if (count($urlParts) == 1) {
+            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$urlParts[0].'/'.$latestVersion.'/introduction.md';
+        } else {
+            $packageName = array_shift($urlParts);
+            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.$latestVersion.'/'.implode('/', $urlParts) . '.md';
+        }
         try {
-            $content = File::get($path);
+            $document = File::get($path);
         } catch (Exception $e) {
             abort(404);
         }
-        dd($content);
 
-        $document = (new Parser())->parse($content);
-
-        $pageProperties = 'xxx';
-        // $pageProperties = $document->matter();
-        // $pageProperties['pagePath'] = request()->path();
-
-        // $pageProperties['content'] = markdown($document->body());
-        // $pageProperties['layout'] = $pageProperties['layout'] ?? request()->segment(1);
-
-        // $pageProperties['package'] = current_package();
-        // $pageProperties['version'] = current_version();
-
-        // $pageProperties['previousUrl'] = app(Navigation::class)->getPreviousPage();
-        // $pageProperties['nextUrl'] = app(Navigation::class)->getNextPage();
+        $pageProperties = $package;
+        $pageProperties['pagePath'] = request()->path();
+        $pageProperties['content'] = Markdown::convertToHtml($document);
 
         return $pageProperties;
     }
