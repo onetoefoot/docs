@@ -31,12 +31,20 @@ class DocController
 
         $pageLocation = end($urlParts);
 
+        // do we use vendor views or app views
+        if (config('docs.views_enabled')) {
+            $view_path = base_path('resources/views/docs');
+        } else {
+            $view_path = dirname(__DIR__).'/resources/views';
+        }
+
         if (count($urlParts) == 1) {
-            $urlPath = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.$latestVersion.'/introduction.md';
+            $path = $view_path . '/'.$packageName.'/'.$latestVersion.'/introduction.md';
         } else {
             array_shift($urlParts);
-            $path = base_path() . '/vendor/onetoefoot/docs/src/resources/views/'.$packageName.'/'.implode('/', $urlParts) . '.md';
+            $path = $view_path . '/'.$packageName.'/'.implode('/', $urlParts) . '.md';
         }
+
         try {
             $document = File::get($path);
         } catch (Exception $e) {

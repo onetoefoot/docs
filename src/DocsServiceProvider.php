@@ -13,16 +13,10 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        // php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="config"
-        $this->publishes([
-            __DIR__.'/../config/docs.php' => config_path('docs.php'),
-        ], 'config');
-        $this->mergeConfigFrom(__DIR__.'/../config/docs.php', 'docs');
-
+        $this->registerConfig();
+        $this->registerViews();
         $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
-
 
     /**
      * Register the service provider.
@@ -31,6 +25,39 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'docs');
+    }
+
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->publishes([
+            __DIR__.'/../config/docs.php' => config_path('docs.php'),
+        ], 'config');
+        $this->mergeConfigFrom(__DIR__.'/../config/docs.php', 'docs');
+    }
+
+    /**
+     * Register views.
+     *
+     * @return void
+     */
+    public function registerViews()
+    {
+        $destinationPath = base_path('resources/views/docs');
+
+        $sourcePath = __DIR__.'/resources/views';
+
+        $this->publishes([
+            $sourcePath => $destinationPath
+        ], 'view');
+
+        $this->loadViewsFrom(array_merge(array_map(function ($path) {
+            return $path . '/docs';
+        }, \Config::get('view.paths')), [$sourcePath]), 'docs');
+
     }
 }

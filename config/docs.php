@@ -26,5 +26,6 @@ return [
         'installation-setup' => 'Installation and setup',
         'questions-issues' => 'Questions and issues',
         'changelog' => 'Changelog'
-    ]
+    ],
+    'views_enabled' => false
 ];
