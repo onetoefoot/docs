@@ -12,18 +12,6 @@ return [
             'description' => 'A simple way I manage package documentation',
             'versions' => ['v1'],
         ],
-        'tasks' => [
-            'githubUrl' => 'https://github.com/onetoefoot/tasks',
-            'title' => 'Tasks',
-            'description' => 'Something about description',
-            'versions' => ['v1'],
-        ],
-        'sampleidentifier' => [
-            'githubUrl' => 'https://github.com/onetoefoot/sampleidentifier',
-            'title' => 'Sample Identifier',
-            'description' => 'Something about sample identifier',
-            'versions' => ['v1'],
-        ],
     ],
     /*
      * The default top menu items
