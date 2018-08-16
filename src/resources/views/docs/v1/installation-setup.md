@@ -14,14 +14,3 @@ You need to publish the config file:
 php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="config"
 ```
 
-To create your own views you need to publish them first
-
-```php
-php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="view"
-```
-
-Then in the config set
-
-```php
-'views_enabled' => true
-```

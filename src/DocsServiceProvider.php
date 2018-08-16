@@ -48,16 +48,16 @@ class DocsServiceProvider extends ServiceProvider
     public function registerViews()
     {
         $destinationPath = base_path('resources/views/docs');
-
-        $sourcePath = __DIR__.'/resources/views';
-
+        $path = __DIR__.'/resources/views';
         $this->publishes([
-            $sourcePath => $destinationPath
+            $path => $destinationPath
         ], 'view');
 
-        $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/docs';
-        }, \Config::get('view.paths')), [$sourcePath]), 'docs');
+        if (config('docs.views_enabled')) {
+            $path = base_path('resources/views') . config('docs.views_path');
+        }
+
+        $this->loadViewsFrom($path, 'docs');
 
     }
 }

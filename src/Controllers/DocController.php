@@ -23,7 +23,7 @@ class DocController
         array_shift($urlParts); // remove docs part of array
 
         $packageName = $urlParts[0];
-        if (!$package = config('docs.templates.' . $packageName)){
+        if (!$package = config('docs.packages.' . $packageName)){
             abort(404);
         }
 
@@ -33,7 +33,7 @@ class DocController
 
         // do we use vendor views or app views
         if (config('docs.views_enabled')) {
-            $view_path = base_path('resources/views/docs');
+            $view_path = base_path('resources/views') . config('docs.views_path');
         } else {
             $view_path = dirname(__DIR__).'/resources/views';
         }
