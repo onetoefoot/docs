@@ -12,6 +12,12 @@ return [
             'description' => 'A simple way I manage package documentation',
             'versions' => ['v1'],
         ],
+        'sampleidentifier' => [
+            'githubUrl' => 'https://github.com/onetoefoot/sampleidentifier',
+            'title' => 'Sample Identifier',
+            'description' => 'A proof of concept to test a friends project idea',
+            'versions' => ['v1'],
+        ],
     ],
     /*
      * The default top menu items
