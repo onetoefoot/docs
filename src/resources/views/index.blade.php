@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('docs::style')
+    <link href="/vendor/docs/css/docs.css" rel="stylesheet">
 
     <div class="wrapper">
         <!-- Sidebar  -->

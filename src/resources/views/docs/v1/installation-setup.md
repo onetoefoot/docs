@@ -14,3 +14,8 @@ You need to publish the config file:
 php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="config"
 ```
 
+You need to publish the css file:
+
+```php
+php artisan vendor:publish --provider="Onetoefoot\Docs\DocsServiceProvider" --tag="public" --force
+```

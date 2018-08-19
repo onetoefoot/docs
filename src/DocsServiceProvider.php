@@ -15,6 +15,7 @@ class DocsServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
         $this->registerViews();
+        $this->registerAssets();
         $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 
@@ -25,6 +26,19 @@ class DocsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+    }
+
+    /**
+     * Register assets.
+     *
+     * @return void
+     */
+    protected function registerAssets()
+    {
+        $this->publishes([
+            __DIR__.'/assets' => public_path('vendor/docs'),
+        ], 'public');
+        $this->mergeConfigFrom(__DIR__.'/../config/docs.php', 'docs');
     }
 
     /**
