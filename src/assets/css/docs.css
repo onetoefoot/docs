@@ -16,7 +16,7 @@ a:focus {
     docs-sidebar STYLE
 ----------------------------------------------------- */
 
-.wrapper {
+.docs-sidebar-wrapper {
     display: flex;
     width: 100%;
 }
@@ -85,6 +85,9 @@ ul ul a {
     padding-left: 30px !important;
     background: #6d7fcc;
 }
+#docs-menu-toggle {
+    display: none;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -115,6 +118,14 @@ ul ul a {
     }
     #docs-sidebar.active {
         margin-left: 0;
+        transition: all 0.4s ease 0s;
+    }
+    #docs-menu-toggle {
+        display: block;
+    }
+    #docs-menu-toggle.active {
+        margin-left: 225px;
+        transition: all 0.4s ease 0s;
     }
     #content {
         width: 100%;
@@ -122,4 +133,31 @@ ul ul a {
     #content.active {
         width: calc(100% - 250px);
     }
+    #docs-wrapper.active {
+        position: relative;
+        left: 250px;
+    }
+    
+    /* #docs-wrapper {
+        padding-left: 0;
+      }
+      
+      #docs-sidebar-wrapper {
+        left: 0;
+      }
+      
+      #docs-wrapper.active {
+        position: relative;
+        left: 250px;
+      }
+      
+      #docs-wrapper.active #docs-sidebar-wrapper {
+        left: 250px;
+        width: 250px;
+        transition: all 0.4s ease 0s;
+      }
+      
+      #docs-menu-toggle {
+        display: inline-block;
+      } */
 }

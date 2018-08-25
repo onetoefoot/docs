@@ -6,7 +6,7 @@
 
     <link href="/vendor/docs/css/docs.css" rel="stylesheet">
 
-    <div class="wrapper">
+    <div class="docs-sidebar-wrapper">
 
         <nav id="docs-sidebar">
 
@@ -37,8 +37,18 @@
         </nav>
 
         <div id="content">
+            <a id="docs-menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                <i class="fa fa-bars"></i>
+            </a>
+
             {!! $content !!}
         </div>
     </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+<script src="/vendor/docs/js/docs.js"></script>
 
 @endsection
