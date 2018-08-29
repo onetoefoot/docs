@@ -31,6 +31,7 @@ a:focus {
     color: #636b6f;
     transition: all 0.3s;
     margin-top: 65px;
+    z-index: 1;
 }
 
 #docs-sidebar.active {
@@ -115,6 +116,7 @@ ul ul a {
 @media (max-width: 768px) {
     #docs-sidebar {
         margin-left: -250px;
+        z-index: 1;
     }
     #docs-sidebar.active {
         margin-left: 0;
